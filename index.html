@@ -209,28 +209,6 @@ a:hover {
 
 
 <script>
-const links = [
-  { 
-    title: "HTML a tag",
-    description: "Learn about the HTML anchor tag",
-     imageUrl: "glitch-gadegts.png",
-    url: "https://www.w3schools.com/tags/tag_a.asp"
-  },
-  { 
-    title: "HTML br tag",
-    description: "Explore the HTML line break tag",
-    imageUrl: "glitch-gadegts.png",
-    url: "https://www.w3schools.com/tags/tag_br.asp"
-  },
-  { 
-    title: "CSS background Property",
-    description: "Understand the CSS background property",
-    imageUrl: "glitch-gadegts.png",
-    url: "https://www.w3schools.com/cssref/css3_pr_background.asp"
-  },
-  // Add more link objects here
-];
-
 function showResult(str) {
   const livesearch = document.getElementById("livesearch");
   livesearch.innerHTML = ""; // Clear existing results
@@ -240,40 +218,50 @@ function showResult(str) {
     return;
   }
 
-  const matchingLinks = links.filter(link => 
-    link.title.toLowerCase().includes(str.toLowerCase()) || 
-    link.description.toLowerCase().includes(str.toLowerCase())
-  );
+  const xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState === 4 && this.status === 200) {
+      const xmlData = this.responseXML;
+      const productElements = xmlData.getElementsByTagName("product");
+
+      const matchingProducts = Array.from(productElements).filter(product => {
+        const name = product.getElementsByTagName("name")[0].textContent.toLowerCase();
+        const description = product.getElementsByTagName("description")[0].textContent.toLowerCase();
+        return name.includes(str.toLowerCase()) || description.includes(str.toLowerCase());
+      });
+
+      if (matchingProducts.length === 0) {
+        livesearch.innerHTML = "No suggestions";
+        return;
+      }
+
+      matchingProducts.forEach(product => {
+        const productContainer = document.createElement("div");
+        productContainer.classList.add("product-container");
+
+        const image = document.createElement("img");
+        const imageUrl = product.getElementsByTagName("image")[0].textContent;
+        image.src = imageUrl;
+        image.alt = product.getElementsByTagName("name")[0].textContent;
+        image.classList.add("product-image");
+
+        const productInfo = document.createElement("div");
+        productInfo.innerHTML = `<strong>${product.getElementsByTagName("name")[0].textContent}</strong><br>${product.getElementsByTagName("description")[0].textContent}<br>Price: ${product.getElementsByTagName("price")[0].textContent}`;
+
+        productContainer.appendChild(image);
+        productContainer.appendChild(productInfo);
+
+        livesearch.appendChild(productContainer);
+      });
+
+      livesearch.style.border = "1px solid #A5ACB2";
+    }
+  };
   
-  if (matchingLinks.length === 0) {
-    livesearch.innerHTML = "No suggestions";
-    return;
-  }
-
-  matchingLinks.forEach(link => {
-    const linkContainer = document.createElement("div");
-    linkContainer.classList.add("link-container");
-
-    const image = document.createElement("img");
-    image.src = link.imageUrl;
-    image.alt = link.title;
-    image.classList.add("link-image");
-
-    const linkInfo = document.createElement("div");
-    linkInfo.innerHTML = `<a href="${link.url}" target="_blank">${link.title}</a><br>${link.description}`;
-
-    linkContainer.appendChild(image);
-    linkContainer.appendChild(linkInfo);
-
-    livesearch.appendChild(linkContainer);
-  });
-
-  livesearch.style.border = "1px solid #A5ACB2";
+  xhttp.open("GET", "products.xml", true);
+  xhttp.send();
 }
 </script>
-
-
-
 
 
       <form>
