@@ -1,33 +1,31 @@
-const products = [
-  { name: 'product one', description: 'Description for product one' },
-  { name: 'product two', description: 'Description for product two' },
-  { name: 'product 3', description: 'Description for product 3' },
-  { name: 'product 4', description: 'Description for product 4' },
-  { name: 'product 5', description: 'Description for product 5' }
-];
-
 const searchInput = document.getElementById('searchInput');
-const productList = document.getElementById('productList');
+const searchResults = document.getElementById('searchResults');
 
-function displayProducts(searchQuery) {
-  productList.innerHTML = '';
+searchInput.addEventListener('input', function() {
+  const query = searchInput.value;
 
-  const filteredProducts = products.filter(product => {
-    const productName = product.name.toLowerCase();
-    return productName.includes(searchQuery.toLowerCase());
-  });
+  if (query.trim() === '') {
+    searchResults.innerHTML = '';
+    return;
+  }
 
-  filteredProducts.forEach(product => {
-    const productDiv = document.createElement('div');
-    productDiv.innerHTML = `<h2>${product.name}</h2><p>${product.description}</p>`;
-    productList.appendChild(productDiv);
-  });
-}
+  const xhr = new XMLHttpRequest();
+  xhr.open('GET', `http://cubex.atwebpages.com/github/glich-gadgets/search.php?q=${query}`, true);
 
-searchInput.addEventListener('input', event => {
-  const searchQuery = event.target.value;
-  displayProducts(searchQuery);
+  xhr.onload = function() {
+    if (xhr.status === 200) {
+      const response = JSON.parse(xhr.responseText);
+      displayResults(response);
+    }
+  };
+
+  xhr.send();
 });
 
-// Initial display of all products
-displayProducts('');
+function displayResults(results) {
+  let output = '';
+  results.forEach(result => {
+    output += `<div class="result">${result}</div>`;
+  });
+  searchResults.innerHTML = output;
+}
