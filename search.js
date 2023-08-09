@@ -12,7 +12,7 @@ function showResult(str) {
       displayResults(this.responseXML, str);
     }
   };
-  xhttp.open("GET", "products.xml", true);
+  xhttp.open("GET", "search.xml", true);
   xhttp.send();
 }
 
