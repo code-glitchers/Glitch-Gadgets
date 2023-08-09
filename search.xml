@@ -1,18 +1,26 @@
-<products>
-  <product>
-    <title>Product 1</title>
-    <description>Description of Product 1.</description>
-    <image>glitch-gadegts.png</image>
-  </product>
-  <product>
-    <title>Product 2</title>
-    <description>Description of Product 2.</description>
-    <image>glitch-gadegts.png</image>
-  </product>
-  <product>
-    <title>Product 3</title>
-    <description>Description of Product 3.</description>
-    <image>glitch-gadegts.png</image>
-  </product>
-  <!-- Add more product elements here as needed -->
-</products>
+<pages>
+  <link>
+    <title>HTML a tag</title>
+    <url>https://www.w3schools.com/tags/tag_a.asp</url>
+  </link>
+  <link>
+    <title>HTML br tag</title>
+    <url>https://www.w3schools.com/tags/tag_br.asp</url>
+  </link>
+  <link>
+    <title>CSS background Property</title>
+    <url>https://www.w3schools.com/cssref/css3_pr_background.asp</url>
+  </link>
+  <link>
+    <title>CSS border Property</title>
+    <url>https://www.w3schools.com/cssref/pr_border.asp</url>
+  </link>
+  <link>
+    <title>JavaScript Date Object</title>
+    <url>https://www.w3schools.com/jsref/jsref_obj_date.asp</url>
+  </link>
+  <link>
+    <title>JavaScript Array Object</title>
+    <url>https://www.w3schools.com/jsref/jsref_obj_array.asp</url>
+  </link>
+</pages>
