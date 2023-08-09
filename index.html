@@ -207,6 +207,8 @@ function showResult(str) {
     resultsDiv.classList.add("small-results");
   } else {
     resultsDiv.classList.remove("small-results");
+    resultsDiv.innerHTML = ""; // Clear the results when search is cleared
+    return; // No need to proceed with fetching XML and displaying results
   }
   
   var xmlhttp = new XMLHttpRequest();
@@ -215,7 +217,7 @@ function showResult(str) {
       displayResults(this.responseXML);
     }
   };
-  xmlhttp.open("GET", "serach.xml", true);
+  xmlhttp.open("GET", "search.xml", true);
   xmlhttp.send();
 }
 
@@ -245,10 +247,13 @@ function displayResults(xml) {
   }
 }
 </script>
-      <div id="search-container">
+
+
+<div id="search-container">
   <input type="text" id="search-input" placeholder="Search..." onkeyup="showResult(this.value)">
 </div>
 <div id="results"></div>
+
 
 
 
