@@ -12,7 +12,8 @@ fetch('products.xml')
                 name: productNode.querySelector('name').textContent,
                 image: productNode.querySelector('image').textContent,
                 description: productNode.querySelector('description').textContent,
-                price: productNode.querySelector('price').textContent
+                price: productNode.querySelector('price').textContent,
+                link: productNode.querySelector('link').textContent
             };
 
             const productElement = document.createElement('div');
@@ -23,13 +24,12 @@ fetch('products.xml')
                 <h2>${product.name}</h2>
                 <p>${product.description}</p>
                 <span class="price">${product.price}</span>
-                <button class="add-to-cart">Add to Cart</button>
+                <button class="view-product">View Product</button>
             `;
 
-            const addToCartButton = productElement.querySelector('.add-to-cart');
-            addToCartButton.addEventListener('click', () => {
-                alert(`Added ${product.name} to cart!`);
-                // Implement cart functionality here
+            const viewProductButton = productElement.querySelector('.view-product');
+            viewProductButton.addEventListener('click', () => {
+                window.location.href = product.link;
             });
 
             productContainer.appendChild(productElement);
