@@ -1,63 +1,55 @@
 <script>
-const links = [
-  { 
-    title: "HTML a tag",
-    description: "Learn about the HTML anchor tag",
-    imageUrl: "https://code-glitchers.github.io/Glitch-Gadgets/glitch-gadegts.png",
-    url: "https://www.w3schools.com/tags/tag_a.asp"
-  },
-  { 
-    title: "HTML br tag",
-    description: "Explore the HTML line break tag",
-    imageUrl: "https://code-glitchers.github.io/Glitch-Gadgets/glitch-gadegts.png",
-    url: "https://www.w3schools.com/tags/tag_br.asp"
-  },
-  { 
-    title: "CSS background Property",
-    description: "Understand the CSS background property",
-    imageUrl: "https://code-glitchers.github.io/Glitch-Gadgets/glitch-gadegts.png",
-    url: "https://www.w3schools.com/cssref/css3_pr_background.asp"
-  },
-  // Add more link objects here
-];
-
 function showResult(str) {
-  const livesearch = document.getElementById("livesearch");
-  livesearch.innerHTML = ""; // Clear existing results
-  livesearch.style.border = "0px"; // Reset border
-
   if (str.length === 0) {
+    document.getElementById("livesearch").innerHTML = "";
+    document.getElementById("livesearch").style.border = "0px";
     return;
   }
 
-  const matchingLinks = links.filter(link => 
-    link.title.toLowerCase().includes(str.toLowerCase()) || 
-    link.description.toLowerCase().includes(str.toLowerCase())
-  );
-  
-  if (matchingLinks.length === 0) {
-    livesearch.innerHTML = "No suggestions";
-    return;
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState === 4 && this.status === 200) {
+      displayResults(this.responseXML, str);
+    }
+  };
+  xhttp.open("GET", "products.xml", true);
+  xhttp.send();
+}
+
+function displayResults(xml, searchStr) {
+  var livesearchDiv = document.getElementById("livesearch");
+  livesearchDiv.innerHTML = "";
+
+  var products = xml.getElementsByTagName("product");
+  for (var i = 0; i < products.length; i++) {
+    var title = products[i].getElementsByTagName("title")[0].childNodes[0].nodeValue;
+    var description = products[i].getElementsByTagName("description")[0].childNodes[0].nodeValue;
+    var image = products[i].getElementsByTagName("image")[0].childNodes[0].nodeValue;
+
+    if (title.toLowerCase().includes(searchStr.toLowerCase())) {
+      var resultItem = document.createElement("div");
+      resultItem.className = "result-item";
+
+      var imgElement = document.createElement("img");
+      imgElement.src = image;
+      imgElement.alt = title;
+
+      var titleElement = document.createElement("h3");
+      titleElement.textContent = title;
+
+      var descriptionElement = document.createElement("p");
+      descriptionElement.textContent = description;
+
+      resultItem.appendChild(imgElement);
+      resultItem.appendChild(titleElement);
+      resultItem.appendChild(descriptionElement);
+
+      livesearchDiv.appendChild(resultItem);
+    }
   }
 
-  matchingLinks.forEach(link => {
-    const linkContainer = document.createElement("div");
-    linkContainer.classList.add("link-container");
-
-    const image = document.createElement("img");
-    image.src = link.imageUrl;
-    image.alt = link.title;
-    image.classList.add("link-image");
-
-    const linkInfo = document.createElement("div");
-    linkInfo.innerHTML = `<a href="${link.url}" target="_blank">${link.title}</a><br>${link.description}`;
-
-    linkContainer.appendChild(image);
-    linkContainer.appendChild(linkInfo);
-
-    livesearch.appendChild(linkContainer);
-  });
-
-  livesearch.style.border = "1px solid #A5ACB2";
+  if (livesearchDiv.innerHTML === "") {
+    livesearchDiv.innerHTML = "No results found.";
+  }
 }
 </script>
