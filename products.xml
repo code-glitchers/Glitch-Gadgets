@@ -1,0 +1,15 @@
+<products>
+    <product>
+        <name>Product 1</name>
+        <image>product1.jpg</image>
+        <description>Lorem ipsum dolor sit amet...</description>
+        <price>$49.99</price>
+    </product>
+    <product>
+        <name>Product 2</name>
+        <image>product2.jpg</image>
+        <description>Nullam vel ligula eu erat...</description>
+        <price>$59.99</price>
+    </product>
+    <!-- Add more product entries as needed -->
+</products>
