@@ -210,58 +210,72 @@ a:hover {
 
 <script>
 function showResult(str) {
-  const livesearch = document.getElementById("livesearch");
-  livesearch.innerHTML = ""; // Clear existing results
-  livesearch.style.border = "0px"; // Reset border
-
   if (str.length === 0) {
+    document.getElementById("livesearch").innerHTML = "";
+    document.getElementById("livesearch").style.border = "0px";
     return;
   }
 
-  const xhttp = new XMLHttpRequest();
+  var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if (this.readyState === 4 && this.status === 200) {
-      const xmlData = this.responseXML;
-      const productElements = xmlData.getElementsByTagName("product");
-
-      const matchingProducts = Array.from(productElements).filter(product => {
-        const name = product.getElementsByTagName("name")[0].textContent.toLowerCase();
-        const description = product.getElementsByTagName("description")[0].textContent.toLowerCase();
-        return name.includes(str.toLowerCase()) || description.includes(str.toLowerCase());
-      });
-
-      if (matchingProducts.length === 0) {
-        livesearch.innerHTML = "No suggestions";
-        return;
-      }
-
-      matchingProducts.forEach(product => {
-        const productContainer = document.createElement("div");
-        productContainer.classList.add("product-container");
-
-        const image = document.createElement("img");
-        const imageUrl = product.getElementsByTagName("image")[0].textContent;
-        image.src = imageUrl;
-        image.alt = product.getElementsByTagName("name")[0].textContent;
-        image.classList.add("product-image");
-
-        const productInfo = document.createElement("div");
-        productInfo.innerHTML = `<strong>${product.getElementsByTagName("name")[0].textContent}</strong><br>${product.getElementsByTagName("description")[0].textContent}<br>Price: ${product.getElementsByTagName("price")[0].textContent}`;
-
-        productContainer.appendChild(image);
-        productContainer.appendChild(productInfo);
-
-        livesearch.appendChild(productContainer);
-      });
-
-      livesearch.style.border = "1px solid #A5ACB2";
+      displayResults(this.responseXML, str);
     }
   };
-  
   xhttp.open("GET", "products.xml", true);
   xhttp.send();
 }
+
+function displayResults(xml, searchStr) {
+  var livesearchDiv = document.getElementById("livesearch");
+  livesearchDiv.innerHTML = "";
+
+  var products = xml.getElementsByTagName("product");
+  for (var i = 0; i < products.length; i++) {
+    var title = products[i].getElementsByTagName("title")[0].childNodes[0].nodeValue;
+    var description = products[i].getElementsByTagName("description")[0].childNodes[0].nodeValue;
+    var image = products[i].getElementsByTagName("image")[0].childNodes[0].nodeValue;
+
+    if (title.toLowerCase().includes(searchStr.toLowerCase())) {
+      var resultItem = document.createElement("div");
+      resultItem.className = "result-item";
+
+      var imgElement = document.createElement("img");
+      imgElement.src = image;
+      imgElement.alt = title;
+
+      var titleElement = document.createElement("h3");
+      titleElement.textContent = title;
+
+      var descriptionElement = document.createElement("p");
+      descriptionElement.textContent = description;
+
+      resultItem.appendChild(imgElement);
+      resultItem.appendChild(titleElement);
+      resultItem.appendChild(descriptionElement);
+
+      livesearchDiv.appendChild(resultItem);
+    }
+  }
+
+  if (livesearchDiv.innerHTML === "") {
+    livesearchDiv.innerHTML = "No results found.";
+  }
+}
 </script>
+<style>
+  .result-item {
+    border: 1px solid #A5ACB2;
+    margin: 10px;
+    padding: 10px;
+  }
+  img {
+    max-width: 100px;
+    max-height: 100px;
+    margin-right: 10px;
+    vertical-align: middle;
+  }
+</style>
 
 
       <form>
