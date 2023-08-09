@@ -172,7 +172,7 @@
 
 
 <style>
-  
+ 
   #search-container {
     text-align: center;
     padding: 20px;
@@ -184,8 +184,11 @@
     border: 1px solid #ccc;
     border-radius: 5px;
   }
-
-
+  #results {
+    text-align: left;
+    margin: 20px auto;
+    max-width: 400px;
+  }
   .small-results a {
     padding: 5px;
     font-size: 12px;
@@ -204,43 +207,43 @@ function showResult(str) {
     resultsDiv.classList.add("small-results");
   } else {
     resultsDiv.classList.remove("small-results");
-    resultsDiv.innerHTML = ""; // Clear the results when search is cleared
-    return; // No need to proceed with fetching XML and displaying results
   }
   
   var xmlhttp = new XMLHttpRequest();
   xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-      displayResults(this.responseXML);
+      displayResults(this.responseXML, str);
     }
   };
   xmlhttp.open("GET", "search.xml", true);
   xmlhttp.send();
 }
 
-function displayResults(xml) {
+function displayResults(xml, searchQuery) {
   var resultsDiv = document.getElementById("results");
   resultsDiv.innerHTML = "";
 
   var links = xml.getElementsByTagName("link");
   for (var i = 0; i < links.length; i++) {
-    var title = links[i].getElementsByTagName("title")[0].childNodes[0].nodeValue;
-    var url = links[i].getElementsByTagName("url")[0].childNodes[0].nodeValue;
-    var image = links[i].getElementsByTagName("image")[0].childNodes[0].nodeValue;
+    var title = links[i].getElementsByTagName("title")[0].textContent;
+    var url = links[i].getElementsByTagName("url")[0].textContent;
+    var image = links[i].getElementsByTagName("image")[0].textContent;
 
-    var linkElem = document.createElement("a");
-    linkElem.href = url;
-    linkElem.target = "_blank";
+    if (title.toLowerCase().includes(searchQuery.toLowerCase())) {
+      var linkElem = document.createElement("a");
+      linkElem.href = url;
+      linkElem.target = "_blank";
 
-    var titleElem = document.createElement("div");
-    titleElem.innerHTML = title;
-    linkElem.appendChild(titleElem);
+      var titleElem = document.createElement("div");
+      titleElem.innerHTML = title;
+      linkElem.appendChild(titleElem);
 
-    var imageElem = document.createElement("img");
-    imageElem.src = image;
-    linkElem.appendChild(imageElem);
+      var imageElem = document.createElement("img");
+      imageElem.src = image;
+      linkElem.appendChild(imageElem);
 
-    resultsDiv.appendChild(linkElem);
+      resultsDiv.appendChild(linkElem);
+    }
   }
 }
 </script>
