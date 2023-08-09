@@ -13,5 +13,18 @@
         <price>$59.99</price>
         <link>product2.html</link>
     </product>
-    <!-- Add more product entries as needed -->
+      <product>
+        <name>Product 1</name>
+        <image>https://code-glitchers.github.io/Glitch-Gadgets/glitch-gadegts.png</image>
+        <description>Lorem ipsum dolor sit amet...</description>
+        <price>$49.99</price>
+        <link>product1.html</link>
+    </product>
+      <product>
+        <name>Product 1</name>
+        <image>https://code-glitchers.github.io/Glitch-Gadgets/glitch-gadegts.png</image>
+        <description>Lorem ipsum dolor sit amet...</description>
+        <price>$49.99</price>
+        <link>product1.html</link>
+    </product>
 </products>
