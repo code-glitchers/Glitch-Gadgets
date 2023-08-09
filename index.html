@@ -195,31 +195,33 @@
     margin: 20px auto;
     max-width: 400px;
   }
-  #results a {
-    display: block;
-    margin-bottom: 10px;
-    padding: 10px;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    text-decoration: none;
-    color: #333;
+  .small-results a {
+    padding: 5px;
+    font-size: 12px;
   }
-  #results img {
-    max-width: 100%;
+  .small-results img {
+    max-width: 50px;
     height: auto;
-    margin-top: 10px;
   }
 </style>
 <script>
 function showResult(str) {
+  var resultsDiv = document.getElementById("results");
+  var searchInput = document.getElementById("search-input");
+  
+  if (str.length > 0) {
+    resultsDiv.classList.add("small-results");
+  } else {
+    resultsDiv.classList.remove("small-results");
+  }
+  
   var xmlhttp = new XMLHttpRequest();
   xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
       displayResults(this.responseXML);
     }
   };
-  xmlhttp.open("GET", "search.xml", true);
+  xmlhttp.open("GET", "links.xml", true);
   xmlhttp.send();
 }
 
@@ -249,10 +251,7 @@ function displayResults(xml) {
   }
 }
 </script>
-</head>
-<body>
-
-<div id="search-container">
+      <div id="search-container">
   <input type="text" id="search-input" placeholder="Search..." onkeyup="showResult(this.value)">
 </div>
 <div id="results"></div>
