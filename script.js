@@ -1,31 +1,37 @@
-const searchInput = document.getElementById('searchInput');
-const searchResults = document.getElementById('searchResults');
+const productContainer = document.getElementById('productContainer');
 
-searchInput.addEventListener('input', function() {
-  const query = searchInput.value;
+fetch('products.xml')
+    .then(response => response.text())
+    .then(data => {
+        const parser = new DOMParser();
+        const xmlDoc = parser.parseFromString(data, 'application/xml');
+        const products = xmlDoc.querySelectorAll('product');
 
-  if (query.trim() === '') {
-    searchResults.innerHTML = '';
-    return;
-  }
+        products.forEach(productNode => {
+            const product = {
+                name: productNode.querySelector('name').textContent,
+                image: productNode.querySelector('image').textContent,
+                description: productNode.querySelector('description').textContent,
+                price: productNode.querySelector('price').textContent
+            };
 
-  const xhr = new XMLHttpRequest();
-  xhr.open('GET', `http://cubex.atwebpages.com/github/glich-gadgets/search.php?q=${query}`, true);
+            const productElement = document.createElement('div');
+            productElement.classList.add('product');
 
-  xhr.onload = function() {
-    if (xhr.status === 200) {
-      const response = JSON.parse(xhr.responseText);
-      displayResults(response);
-    }
-  };
+            productElement.innerHTML = `
+                <img src="${product.image}" alt="${product.name}">
+                <h2>${product.name}</h2>
+                <p>${product.description}</p>
+                <span class="price">${product.price}</span>
+                <button class="add-to-cart">Add to Cart</button>
+            `;
 
-  xhr.send();
-});
+            const addToCartButton = productElement.querySelector('.add-to-cart');
+            addToCartButton.addEventListener('click', () => {
+                alert(`Added ${product.name} to cart!`);
+                // Implement cart functionality here
+            });
 
-function displayResults(results) {
-  let output = '';
-  results.forEach(result => {
-    output += `<div class="result">${result}</div>`;
-  });
-  searchResults.innerHTML = output;
-}
+            productContainer.appendChild(productElement);
+        });
+    });
