@@ -6,58 +6,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <title>ɢʟɪᴛᴄʜ-ɢᴀᴅɢᴇᴛꜱ</title>
-<style>form {
-  margin: 0 auto;
-  width: 50%;
-}
 
-input {
-  border: 0;
-  outline: 0;
-  background-color: #333333;
-  color: #E0E0E0;
-  padding: 10px;
-  font-size: 16px;
-}
-
-input:focus {
-  background-color: #444444;
-}
-
-#livesearch {
-  width: 100%;
-  max-height: 300px;
-  overflow-y: scroll;
-  border: 1px solid #A5ACB2;
-  margin-top: 10px;
-}
-
-a {
-  color: #E0E0E0;
-  text-decoration: none;
-}
-
-a:hover {
-  color: #FFFFFF;
-}
-
-@media (max-width: 768px) {
-  form {
-    width: 100%;
-  }
-}
-
-@media (max-width: 576px) {
-  input {
-    font-size: 14px;
-  }
-}
-
-@media (max-width: 375px) {
-  input {
-    font-size: 12px;
-  }
-}</style>
     
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://code-glitchers.github.io/style.css">
@@ -222,57 +171,91 @@ a:hover {
     <article class="about  active" data-page="about">
 
 
-
+<style>
+  /* Basic responsive styling */
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+  }
+  #search-container {
+    text-align: center;
+    padding: 20px;
+  }
+  #search-input {
+    width: 100%;
+    max-width: 400px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  #results {
+    text-align: left;
+    margin: 20px auto;
+    max-width: 400px;
+  }
+  #results a {
+    display: block;
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #333;
+  }
+  #results img {
+    max-width: 100%;
+    height: auto;
+    margin-top: 10px;
+  }
+</style>
 <script>
 function showResult(str) {
-  if (str.length === 0) {
-    document.getElementById("livesearch").innerHTML = "";
-    document.getElementById("livesearch").style.border = "0px";
-    return;
-  }
-
   var xmlhttp = new XMLHttpRequest();
   xmlhttp.onreadystatechange = function() {
-    if (this.readyState === 4 && this.status === 200) {
-      displaySearchResults(this, str);
+    if (this.readyState == 4 && this.status == 200) {
+      displayResults(this.responseXML);
     }
   };
   xmlhttp.open("GET", "search.xml", true);
   xmlhttp.send();
 }
 
-function displaySearchResults(xml, str) {
-  var xmlDoc = xml.responseXML;
-  var links = xmlDoc.getElementsByTagName("link");
-  var hint = "";
+function displayResults(xml) {
+  var resultsDiv = document.getElementById("results");
+  resultsDiv.innerHTML = "";
 
+  var links = xml.getElementsByTagName("link");
   for (var i = 0; i < links.length; i++) {
     var title = links[i].getElementsByTagName("title")[0].childNodes[0].nodeValue;
     var url = links[i].getElementsByTagName("url")[0].childNodes[0].nodeValue;
     var image = links[i].getElementsByTagName("image")[0].childNodes[0].nodeValue;
 
-    if (title.toLowerCase().indexOf(str.toLowerCase()) !== -1) {
-      hint += "<div class='search-result'>";
-      hint += "<a href='" + url + "' target='_blank'>" + title + "</a><br>";
-      hint += "<img src='" + image + "' alt='" + title + "'>";
-      hint += "</div>";
-    }
-  }
+    var linkElem = document.createElement("a");
+    linkElem.href = url;
+    linkElem.target = "_blank";
 
-  var livesearch = document.getElementById("livesearch");
-  if (hint === "") {
-    livesearch.innerHTML = "No suggestions";
-  } else {
-    livesearch.innerHTML = hint;
+    var titleElem = document.createElement("div");
+    titleElem.innerHTML = title;
+    linkElem.appendChild(titleElem);
+
+    var imageElem = document.createElement("img");
+    imageElem.src = image;
+    linkElem.appendChild(imageElem);
+
+    resultsDiv.appendChild(linkElem);
   }
-  livesearch.style.border = "1px solid #A5ACB2";
 }
-
 </script>
-      <form>
-  <input type="text" size="30" onkeyup="showResult(this.value)">
-  <div id="livesearch"></div>
-</form>
+</head>
+<body>
+
+<div id="search-container">
+  <input type="text" id="search-input" placeholder="Search..." onkeyup="showResult(this.value)">
+</div>
+<div id="results"></div>
 
 
 
