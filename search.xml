@@ -1,0 +1,18 @@
+<products>
+  <product>
+    <title>Product 1</title>
+    <description>Description of Product 1.</description>
+    <image>glitch-gadegts.png</image>
+  </product>
+  <product>
+    <title>Product 2</title>
+    <description>Description of Product 2.</description>
+    <image>glitch-gadegts.png</image>
+  </product>
+  <product>
+    <title>Product 3</title>
+    <description>Description of Product 3.</description>
+    <image>glitch-gadegts.png</image>
+  </product>
+  <!-- Add more product elements here as needed -->
+</products>
