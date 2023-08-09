@@ -57,9 +57,8 @@
 <div class="header-container">
   <img src="glitch-gadegts.png" alt="Glitch Gadgets" class="centered-image">
       <div id="example">
-        <h1 class="header-text">ɢʟɪᴛᴄʜ-ɢᴀᴅɢᴇᴛꜱ</h1>
-        <h1 class="header-text">ɢʟɪᴛᴄʜ-ɢᴀᴅɢᴇᴛꜱ</h1>
-        <h1 class="header-text">ɢʟɪᴛᴄʜ-ɢᴀᴅɢᴇᴛꜱ</h1>
+        <h2 class="header-text">ɢʟɪᴛᴄʜ-ɢᴀᴅɢᴇᴛꜱ</h1>
+       
       </div>
 </div>
  <p>✦ʟᴇᴛ ɢᴀᴅɢᴇᴛ ɢʟɪᴛᴄʜ,ʟᴇᴛ ʏᴏᴜʀ ᴍɪɴᴅ ᴛʀᴀɴꜱᴄᴇɴᴅ✦</p>
@@ -102,51 +101,28 @@
 
     <header class="headerX">
     <article class="about  active" data-page="about">
-<style>body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 20px;
-}
-
-h1 {
-  text-align: center;
-}
-
-#searchInput {
-  width: 100%;
-  padding: 10px;
-  margin-top: 10px;
-}
-
-#searchResults {
-  margin-top: 20px;
-}
-
-.result {
-  padding: 10px;
-  border-bottom: 1px solid #ddd;
-}
-
-@media screen and (max-width: 768px) {
-  #searchResults {
-    margin-top: 10px;
+<script>
+function showResult(str) {
+  if (str.length==0) {
+    document.getElementById("livesearch").innerHTML="";
+    document.getElementById("livesearch").style.border="0px";
+    return;
   }
+  var xmlhttp=new XMLHttpRequest();
+  xmlhttp.onreadystatechange=function() {
+    if (this.readyState==4 && this.status==200) {
+      document.getElementById("livesearch").innerHTML=this.responseText;
+      document.getElementById("livesearch").style.border="1px solid #A5ACB2";
+    }
+  }
+  xmlhttp.open("GET","http://cubex.atwebpages.com/github/glich-gadgets/livesearch.php?q="+str,true);
+  xmlhttp.send();
 }
-</style>
-
-
-<input type="text" id="searchInput" placeholder="Search products...">
-  <div id="searchResults"></div>
-  <script src="script.js"></script>
-
-
-
-
-
-
-
-
-
+</script>
+<form>
+<input type="text" size="30" onkeyup="showResult(this.value)">
+<div id="livesearch"></div>
+</form>
 
       
 
