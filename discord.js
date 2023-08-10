@@ -1,4 +1,3 @@
-
 $(document).ready(function() {
     const clientId = "1001933562565644338"; // Replace with your actual client ID
     const redirectUri = "https://code-glitchers.github.io/Glitch-Gadgets/"; // Your actual redirect URI
@@ -34,14 +33,14 @@ $(document).ready(function() {
         })
         .then(response => response.json())
         .then(user => {
-            avatarElement.attr("src", `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`);
+            const avatarUrl = user.avatar ? `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png` : "https://discord.com/assets/322c936a8c8be1b803cd94861bdfa868.png";
+            avatarElement.attr("src", avatarUrl);
             usernameElement.text(`Hello, ${user.username}#${user.discriminator}!`);
-            userInfoDiv.show(); // Display the user info section
-            loginButton.hide(); // Hide the login button after login
+            userInfoDiv.show();
+            loginButton.hide();
         })
         .catch(error => {
             console.error("Error fetching user data:", error);
         });
     }
 });
-
