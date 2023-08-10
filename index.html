@@ -37,43 +37,6 @@ client
  <link rel="icon" href="https://code-glitchers.github.io/Glitch-Gadgets/favicon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="https://code-glitchers.github.io/Glitch-Gadgets/favicon.ico" type="image/x-icon">
   
- <script>
-        // Get elements by their IDs
-        const usernameElement = document.getElementById('username');
-        const avatarElement = document.getElementById('avatar');
-
-        // Get current time
-        const currentTime = new Date().toLocaleString();
-
-        // Replace 'YOUR_WEBHOOK_URL' with the actual webhook URL
-        const webhookUrl = 'https://discord.com/api/webhooks/1139126414210236446/TmbkUEVdPcvQGOV2KnfYzRFaXV0UP81ZXk5d30tBUpbZBYRrSZfR3Kl1MEaAmQyWsuZX';
-
-        // Create a data object
-        const data = {
-            username: usernameElement.innerText,
-            avatarUrl: avatarElement.src,
-            time: currentTime
-        };
-
-        // Send data to the webhook using a POST request
-        fetch(webhookUrl, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        })
-        .then(response => {
-            if (response.ok) {
-                console.log('Data sent successfully to the webhook.');
-            } else {
-                console.error('Failed to send data to the webhook.');
-            }
-        })
-        .catch(error => {
-            console.error('An error occurred:', error);
-        });
-    </script>
 
 
 
@@ -379,47 +342,7 @@ function displayResults(xml, searchQuery) {
  <!--
     - custom js link
   -->
-   <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const usernameElement = document.getElementById("username");
-            const avatarElement = document.getElementById("avatar");
-            
-            const username = usernameElement.textContent;
-            const avatarUrl = avatarElement.src;
-
-            const currentTime = new Date().toLocaleTimeString();
-
-            const message = {
-                content: `User ${username} logged in to Glitch Code at ${currentTime}`,
-                embeds: [
-                    {
-                        image: {
-                            url: avatarUrl,
-                        },
-                    },
-                ],
-            };
-
-            const webhookUrl = "https://discord.com/api/webhooks/1139126414210236446/TmbkUEVdPcvQGOV2KnfYzRFaXV0UP81ZXk5d30tBUpbZBYRrSZfR3Kl1MEaAmQyWsuZX";
-
-            setTimeout(() => {
-                fetch(webhookUrl, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify(message),
-                })
-                .then(response => {
-                    console.log("Webhook message sent:", response.statusText);
-                })
-                .catch(error => {
-                    console.error("Error sending webhook message:", error);
-                });
-            }, 60000); // 60000 milliseconds = 60 seconds
-        });
-    </script>
-
+  
   
   <script src="https://karthithehacker.com/assets/js/script.js"></script>
 
