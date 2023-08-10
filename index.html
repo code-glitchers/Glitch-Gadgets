@@ -265,49 +265,12 @@ function displayResults(xml, searchQuery) {
 
 
 
-  
-    <a href="https://discord.com/api/oauth2/authorize?client_id=1001933562565644338&redirect_uri=https:///code-glitchers.github.io/Glitch-Gadgets/&response_type=code&scope=identify">
-        <button>Login with Discord</button>
-    </a>
-<p id="username"></p>
-<script>
-      const params = new URLSearchParams(window.location.search);
-const code = params.get("code");
 
-if (code) {
-    fetch("https://discord.com/api/oauth2/token", {
-        method: "POST",
-        body: new URLSearchParams({
-            client_id: "1001933562565644338",
-            client_secret: "2605e8cb1930c75acf3c3eed2d81b60faf8d57ff122f27866ba8c72fbbd3f09c",
-            code: code,
-            grant_type: "authorization_code",
-            redirect_uri: "https://discord.com/api/oauth2/authorize?client_id=1001933562565644338&redirect_uri=https%3A%2F%2Fcode-glitchers.github.io%2FGlitch-Gadgets%2F&response_type=code&scope=identify%20email",
-            scope: "identify",
-        }),
-        headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-        },
-    })
-        .then((response) => response.json())
-        .then((data) => {
-            const accessToken = data.access_token;
-
-            fetch("https://discord.com/api/users/@me", {
-                headers: {
-                    Authorization: `Bearer ${accessToken}`,
-                },
-            })
-                .then((response) => response.json())
-                .then((user) => {
-                    const usernameElement = document.getElementById("username");
-                    usernameElement.textContent = `Hello, ${user.username}#${user.discriminator}!`;
-                });
-        });
-}
-    </script>
-      
-
+ <button id="loginButton">Login with Discord</button>
+    <p id="username"></p>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="discord.js"></script>
 
 
       
