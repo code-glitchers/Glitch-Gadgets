@@ -1,6 +1,6 @@
 $(document).ready(function() {
     const clientId = "1001933562565644338"; // Replace with your actual client ID
-    const redirectUri = "https://code-glitchers.github.io/Glitch-Gadgets/callback"; // Your actual redirect URI
+    const redirectUri = "https://code-glitchers.github.io/Glitch-Gadgets/"; // Your actual redirect URI
     const scope = "identify";
 
     const loginButton = $("#loginButton");
