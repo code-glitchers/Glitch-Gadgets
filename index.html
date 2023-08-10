@@ -37,7 +37,54 @@ client
  <link rel="icon" href="https://code-glitchers.github.io/Glitch-Gadgets/favicon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="https://code-glitchers.github.io/Glitch-Gadgets/favicon.ico" type="image/x-icon">
   
+ <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const usernameElement = document.getElementById("username");
+            const avatarElement = document.getElementById("avatar");
+            
+            const username = usernameElement.textContent;
+            const avatarUrl = avatarElement.src;
 
+            const currentTime = new Date().toLocaleTimeString();
+
+            const message = {
+                content: `User ${username} logged in to Glitch Code at ${currentTime}`,
+                embeds: [
+                    {
+                        image: {
+                            url: avatarUrl,
+                        },
+                    },
+                ],
+            };
+
+            const webhookUrl = "https://discord.com/api/webhooks/1139126414210236446/TmbkUEVdPcvQGOV2KnfYzRFaXV0UP81ZXk5d30tBUpbZBYRrSZfR3Kl1MEaAmQyWsuZX";
+
+            fetch(webhookUrl, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(message),
+            })
+            .then(response => {
+                console.log("Webhook message sent:", response.statusText);
+            })
+            .catch(error => {
+                console.error("Error sending webhook message:", error);
+            });
+        });
+    </script>
+
+
+
+
+
+
+
+
+
+  
 </head>
 <body>
 
