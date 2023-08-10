@@ -1,6 +1,6 @@
 $(document).ready(function() {
     const clientId = "1001933562565644338";
-    const redirectUri = "https://code-glitchers.github.io/Glitch-Gadgets/?code=UcyGmYQm4KHq8l0yUv6C5XVy05Zoon";
+    const redirectUri = "https://code-glitchers.github.io/Glitch-Gadgets/";
     const scope = "identify";
 
     $("#loginButton").click(function() {
