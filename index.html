@@ -156,12 +156,21 @@ client
             display: inline;
         }
     </style>
+       <style>
+  .social {
+    display: flex;
+    align-items: center;
+        }
+
+     
+    
+    </style>
     <br>
  <button id="loginButton">Login with Discord</button>
  
     <div id="userInfo" style="display: none;">
-    <img id="avatar" alt="User Avatar" crossOrigin="anonymous">
-    <p id="username"></p>
+ <div class="social">   <img id="avatar" alt="User Avatar" crossOrigin="anonymous"> <p id="username"></p></div>
+   
 </div>
    
    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
