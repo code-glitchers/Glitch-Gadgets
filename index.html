@@ -1,46 +1,516 @@
-$(document).ready(function() {
-    const clientId = "1001933562565644338"; // Replace with your actual client ID
-    const redirectUri = "https://code-glitchers.github.io/Glitch-Gadgets/"; // Your actual redirect URI
-    const scope = "identify";
 
-    const loginButton = $("#loginButton");
-    const userInfoDiv = $("#userInfo");
-    const avatarElement = $("#avatar");
-    const usernameElement = $("#username");
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://code-glitchers.github.io/stylex.css">
+<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    loginButton.click(function() {
-        window.location.href = https://discord.com/api/oauth2/authorize?client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&response_type=token&scope=${scope};
-    });
+<title>ɢʟɪᴛᴄʜ-ɢᴀᴅɢᴇᴛꜱ</title>
+<script src="https://cdn.jsdelivr.net/npm/appwrite@10.1.0" />
+<script>
+    const { Client } = Appwrite;
+</script>
+    <script>
+    const client = new Client();
 
-    function parseHashParams() {
-        const hash = window.location.hash.substring(1);
-        const params = hash.split("&").reduce(function(acc, item) {
-            const [key, value] = item.split("=");
-            acc[key] = decodeURIComponent(value);
-            return acc;
-        }, {});
-        return params;
+client
+    .setEndpoint('https://cloud.appwrite.io/v1')
+    .setProject('6475f0d04024eb59ab0a');
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://code-glitchers.github.io/style.css">
+    <meta name="application-name" content="ɢʟɪᴛᴄʜ-ɢᴀᴅɢᴇᴛꜱ" />
+    <meta name="msapplication-TileColor" content="#000000" />
+    <meta name="description" content="ᴜᴘɢʀᴀᴅᴇ ʏᴏᴜʀ ᴛᴇᴄʜ ᴀɴᴅ ɢᴀᴍɪɴɢ  ᴡɪᴛʜ ɢʟɪᴛᴄʜ ɢᴀᴅɢᴇᴛꜱ. ᴄʜᴀᴛ ᴛᴏ ᴇxᴘʟᴏʀᴇ ᴘᴇʀꜱᴏɴᴀʟɪᴢᴇᴅ ᴘɪᴄᴋꜱ ꜰᴏʀ ᴇʟᴇᴄᴛʀᴏɴɪᴄꜱ, ᴄᴏᴍᴘᴜᴛᴇʀ ᴀᴄᴄᴇꜱꜱᴏʀɪᴇꜱ, ᴀɴᴅ ɢᴀᴍɪɴɢ ɢᴇᴀʀ. ᴇʟᴇᴠᴀᴛᴇ ʏᴏᴜʀ ꜱʜᴏᴘᴘɪɴɢ ᴇxᴘᴇʀɪᴇɴᴄᴇ, ᴏɴᴇ ᴍᴇꜱꜱᴀɢᴇ ᴀᴛ ᴀ ᴛɪᴍᴇ." />
+    <meta name="keywords" content="ɢʟɪᴛᴄʜ-ɢᴀᴅɢᴇᴛꜱ, glitch-gadegts, styx, code-glitch," />
+    <meta name="author" content="ciph3r" />
+    <link rel="manifest" href="https://code-glitchers.github.io/Glitch-Gadgets/manifest.json" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <meta property="og:image" content="https://code-glitchers.github.io/Glitch-Gadgets/banner.png" />
+  
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="ɢʟɪᴛᴄʜ-ɢᴀᴅɢᴇᴛꜱ">
+    <meta name="twitter:description" content="ᴜᴘɢʀᴀᴅᴇ ʏᴏᴜʀ ᴛᴇᴄʜ ᴀɴᴅ ɢᴀᴍɪɴɢ  ᴡɪᴛʜ ɢʟɪᴛᴄʜ ɢᴀᴅɢᴇᴛꜱ. ᴄʜᴀᴛ ᴛᴏ ᴇxᴘʟᴏʀᴇ ᴘᴇʀꜱᴏɴᴀʟɪᴢᴇᴅ ᴘɪᴄᴋꜱ ꜰᴏʀ ᴇʟᴇᴄᴛʀᴏɴɪᴄꜱ, ᴄᴏᴍᴘᴜᴛᴇʀ ᴀᴄᴄᴇꜱꜱᴏʀɪᴇꜱ, ᴀɴᴅ ɢᴀᴍɪɴɢ ɢᴇᴀʀ. ᴇʟᴇᴠᴀᴛᴇ ʏᴏᴜʀ ꜱʜᴏᴘᴘɪɴɢ ᴇxᴘᴇʀɪᴇɴᴄᴇ, ᴏɴᴇ ᴍᴇꜱꜱᴀɢᴇ ᴀᴛ ᴀ ᴛɪᴍᴇ.">
+    <meta name="twitter:image" content="https://code-glitchers.github.io/Glitch-Gadgets/banner.png">
+  
+ <link rel="icon" href="https://code-glitchers.github.io/Glitch-Gadgets/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="https://code-glitchers.github.io/Glitch-Gadgets/favicon.ico" type="image/x-icon">
+  
+
+
+
+
+
+  
+</head>
+<body>
+
+ <style>
+  .link-container {
+    display: flex;
+    margin-bottom: 10px;
+  }
+
+  .link-image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin-right: 10px;
+  }
+</style>
+
+
+
+
+<style>.header-container {
+  display: flex;
+  align-items: center;
+}
+
+.centered-image {
+  width: 80px;
+  height: 80px;
+}
+
+.header-text {
+  margin-left: 10px; /* Adjust the margin as needed */
+}
+
+
+
+
+
+
+.product-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+}
+
+.product {
+    border: 1px solid #ccc;
+    padding: 20px;
+    text-align: center;
+    max-width: 300px;
+    margin: 10px;
+    box-sizing: border-box;
+}
+
+.product img {
+    max-width: 100%;
+}
+
+.price {
+    font-weight: bold;
+    color: #d63031;
+    margin-top: 10px;
+}
+
+.add-to-cart {
+    background-color: #d63031;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+/* Media query for screens smaller than 768px */
+@media (max-width: 768px) {
+    .product {
+        max-width: 100%;
+    }
+    
+    .product-container {
+        justify-content: flex-start; /* Align products to the left on small screens */
+    }
+}
+
+
+
+
+
+  
+</style>
+
+
+    <header>
+<div class="header-container">
+  <img src="glitch-gadegts.png" alt="Glitch Gadgets" class="centered-image">
+      <div id="example">
+        <h2 class="header-text">ɢʟɪᴛᴄʜ-ɢᴀᴅɢᴇᴛꜱ</h1>
+       
+      </div>
+</div>
+ <p>✦ʟᴇᴛ ɢᴀᴅɢᴇᴛ ɢʟɪᴛᴄʜ,ʟᴇᴛ ʏᴏᴜʀ ᴍɪɴᴅ ᴛʀᴀɴꜱᴄᴇɴᴅ✦</p>
+    <style>
+        #userInfo {
+            display: none;
+            align-items: center;
+            gap: 10px;
+        }
+
+        #avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
+
+        #userInfo p {
+            display: inline;
+        }
+    </style>
+       <style>
+  .social {
+    display: flex;
+    align-items: center;
+        }
+
+     
+    
+    </style>
+    <br>
+ <button id="loginButton">Login with Discord</button>
+ 
+    <div id="userInfo" style="display: none;">
+ <div class="social">   <img id="avatar" alt="User Avatar" crossOrigin="anonymous"> <p id="username"></p></div>
+   
+</div>
+   
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="discord.js"></script>
+ 
+       
+    
+        <nav class="navbar">
+
+          <ul class="navbar-list">
+  
+            <li class="navbar-item">
+              <button class="navbar-link" data-nav-link>About Us</button>
+            </li>
+  
+            <li class="navbar-item">
+              <button onclick="window.location.href='tools.html'" class="navbar-link active" data-nav-link>Tools we use</button>
+            </li>
+  
+            <li class="navbar-item">
+              <button class="navbar-link" onclick="window.location.href='product.html'" data-nav-link>Product & services</button>
+            </li>
+  
+
+  <li class="navbar-item">
+    <button class="navbar-link" onclick="window.location.href='contact.html'">Contact Us</button>
+  </li>
+  
+          </ul>
+  
+        </nav>
+    </header>
+
+
+    <header class="headerX">
+    <article class="about  active" data-page="about">
+
+
+<style>
+ #search-container {
+    text-align: center;
+    padding: 20px;
+  }
+  #search-input {
+    width: 100%;
+    max-width: 400px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  #results {
+    text-align: left;
+    margin: 20px auto;
+    max-width: 400px;
+  }
+  .small-results a {
+    padding: 5px;
+    font-size: 12px;
+  }
+  .small-results img {
+    max-width: 50px;
+    height: auto;
+  }
+
+</style>
+<script>
+function showResult(str) {
+  var resultsDiv = document.getElementById("results");
+  var searchInput = document.getElementById("search-input");
+  
+  if (str.length > 0) {
+    resultsDiv.classList.add("small-results");
+  } else {
+    resultsDiv.classList.remove("small-results");
+  }
+  
+  var xmlhttp = new XMLHttpRequest();
+  xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      displayResults(this.responseXML, str);
+    }
+  };
+  xmlhttp.open("GET", "links.xml", true);
+  xmlhttp.send();
+}
+
+function displayResults(xml, searchQuery) {
+  var resultsDiv = document.getElementById("results");
+  resultsDiv.innerHTML = "";
+
+  var links = xml.getElementsByTagName("link");
+  for (var i = 0; i < links.length; i++) {
+    var title = links[i].getElementsByTagName("title")[0].textContent;
+    var url = links[i].getElementsByTagName("url")[0].textContent;
+    var image = links[i].getElementsByTagName("image")[0].textContent;
+
+    if (title.toLowerCase().includes(searchQuery.toLowerCase())) {
+      var linkElem = document.createElement("a");
+      linkElem.href = url;
+      linkElem.target = "_blank";
+
+      var titleElem = document.createElement("div");
+      titleElem.innerHTML = title;
+      linkElem.appendChild(titleElem);
+
+      var imageElem = document.createElement("img");
+      imageElem.src = image;
+      linkElem.appendChild(imageElem);
+
+      resultsDiv.appendChild(linkElem);
+    }
+  }
+}
+</script>
+
+
+<div id="search-container">
+  <input type="text" id="search-input" placeholder="Search..." onkeyup="showResult(this.value)">
+</div>
+<div id="results"></div>
+
+
+
+
+
+
+
+      
+
+
+
+
+
+
+
+
+
+
+
+
+ <div class="product-container" id="productContainer">
+        <!-- Product elements will be added here using JavaScript -->
+    </div>
+    <script src="script.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+      
+
+      </article>
+
+  </header>
+    
+
+      
+ <!--
+    - custom js link
+  -->
+  
+  
+  <script src="https://karthithehacker.com/assets/js/script.js"></script>
+
+  <!--
+    - ionicon link
+  -->
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  <script>
+  'use strict';
+
+
+
+// element toggle function
+const elementToggleFunc = function (elem) { elem.classList.toggle("active"); }
+
+
+
+// sidebar variables
+const sidebar = document.querySelector("[data-sidebar]");
+const sidebarBtn = document.querySelector("[data-sidebar-btn]");
+
+// sidebar toggle functionality for mobile
+sidebarBtn.addEventListener("click", function () { elementToggleFunc(sidebar); });
+
+
+
+// testimonials variables
+const testimonialsItem = document.querySelectorAll("[data-testimonials-item]");
+const modalContainer = document.querySelector("[data-modal-container]");
+const modalCloseBtn = document.querySelector("[data-modal-close-btn]");
+const overlay = document.querySelector("[data-overlay]");
+
+// modal variable
+const modalImg = document.querySelector("[data-modal-img]");
+const modalTitle = document.querySelector("[data-modal-title]");
+const modalText = document.querySelector("[data-modal-text]");
+
+// modal toggle function
+const testimonialsModalFunc = function () {
+  modalContainer.classList.toggle("active");
+  overlay.classList.toggle("active");
+}
+
+// add click event to all modal items
+for (let i = 0; i < testimonialsItem.length; i++) {
+
+  testimonialsItem[i].addEventListener("click", function () {
+
+    modalImg.src = this.querySelector("[data-testimonials-avatar]").src;
+    modalImg.alt = this.querySelector("[data-testimonials-avatar]").alt;
+    modalTitle.innerHTML = this.querySelector("[data-testimonials-title]").innerHTML;
+    modalText.innerHTML = this.querySelector("[data-testimonials-text]").innerHTML;
+
+    testimonialsModalFunc();
+
+  });
+
+}
+
+// add click event to modal close button
+modalCloseBtn.addEventListener("click", testimonialsModalFunc);
+overlay.addEventListener("click", testimonialsModalFunc);
+
+
+
+// custom select variables
+const select = document.querySelector("[data-select]");
+const selectItems = document.querySelectorAll("[data-select-item]");
+const selectValue = document.querySelector("[data-selecct-value]");
+const filterBtn = document.querySelectorAll("[data-filter-btn]");
+
+select.addEventListener("click", function () { elementToggleFunc(this); });
+
+// add event in all select items
+for (let i = 0; i < selectItems.length; i++) {
+  selectItems[i].addEventListener("click", function () {
+
+    let selectedValue = this.innerText.toLowerCase();
+    selectValue.innerText = this.innerText;
+    elementToggleFunc(select);
+    filterFunc(selectedValue);
+
+  });
+}
+
+// filter variables
+const filterItems = document.querySelectorAll("[data-filter-item]");
+
+const filterFunc = function (selectedValue) {
+
+  for (let i = 0; i < filterItems.length; i++) {
+
+    if (selectedValue === "all") {
+      filterItems[i].classList.add("active");
+    } else if (selectedValue === filterItems[i].dataset.category) {
+      filterItems[i].classList.add("active");
+    } else {
+      filterItems[i].classList.remove("active");
     }
 
-    const params = parseHashParams();
-    if (params.access_token) {
-        localStorage.setItem('discordAccessToken', params.access_token);
+  }
 
-        fetch("https://discord.com/api/users/@me", {
-            headers: {
-                Authorization: Bearer ${params.access_token},
-            },
-        })
-        .then(response => response.json())
-        .then(user => {
-            const avatarUrl = user.avatar ? https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png : "https://discord.com/assets/322c936a8c8be1b803cd94861bdfa868.png";
-            avatarElement.attr("src", avatarUrl);
-            usernameElement.text(Hello, ${user.username}#${user.discriminator}!);
-            userInfoDiv.show();
-            loginButton.hide();
-        })
-        .catch(error => {
-            console.error("Error fetching user data:", error);
-        });
+}
+
+// add event in all filter button items for large screen
+let lastClickedBtn = filterBtn[0];
+
+for (let i = 0; i < filterBtn.length; i++) {
+
+  filterBtn[i].addEventListener("click", function () {
+
+    let selectedValue = this.innerText.toLowerCase();
+    selectValue.innerText = this.innerText;
+    filterFunc(selectedValue);
+
+    lastClickedBtn.classList.remove("active");
+    this.classList.add("active");
+    lastClickedBtn = this;
+
+  });
+
+}
+
+
+
+// contact form variables
+const form = document.querySelector("[data-form]");
+const formInputs = document.querySelectorAll("[data-form-input]");
+const formBtn = document.querySelector("[data-form-btn]");
+
+// add event to all form input field
+for (let i = 0; i < formInputs.length; i++) {
+  formInputs[i].addEventListener("input", function () {
+
+    // check form validation
+    if (form.checkValidity()) {
+      formBtn.removeAttribute("disabled");
+    } else {
+      formBtn.setAttribute("disabled", "");
     }
-});
+
+  });
+}
+
+
+
+// page navigation variables
+const navigationLinks = document.querySelectorAll("[data-nav-link]");
+const pages = document.querySelectorAll("[data-page]");
+
+// add event to all nav link
+for (let i = 0; i < navigationLinks.length; i++) {
+  navigationLinks[i].addEventListener("click", function () {
+
+    for (let i = 0; i < pages.length; i++) {
+      if (this.innerHTML.toLowerCase() === pages[i].dataset.page) {
+        pages[i].classList.add("active");
+        navigationLinks[i].classList.add("active");
+        window.scrollTo(0, 0);
+      } else {
+        pages[i].classList.remove("active");
+        navigationLinks[i].classList.remove("active");
+      }
+    }
+
+  });
+}</script>     
+</body>
+</html>
