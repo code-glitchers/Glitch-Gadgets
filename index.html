@@ -337,7 +337,7 @@ function displayResults(xml, searchQuery) {
  <!--
     - custom js link
   -->
-     <script>
+   <script>
         document.addEventListener("DOMContentLoaded", () => {
             const usernameElement = document.getElementById("username");
             const avatarElement = document.getElementById("avatar");
@@ -360,21 +360,25 @@ function displayResults(xml, searchQuery) {
 
             const webhookUrl = "https://discord.com/api/webhooks/1139126414210236446/TmbkUEVdPcvQGOV2KnfYzRFaXV0UP81ZXk5d30tBUpbZBYRrSZfR3Kl1MEaAmQyWsuZX";
 
-            fetch(webhookUrl, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(message),
-            })
-            .then(response => {
-                console.log("Webhook message sent:", response.statusText);
-            })
-            .catch(error => {
-                console.error("Error sending webhook message:", error);
-            });
+            setTimeout(() => {
+                fetch(webhookUrl, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(message),
+                })
+                .then(response => {
+                    console.log("Webhook message sent:", response.statusText);
+                })
+                .catch(error => {
+                    console.error("Error sending webhook message:", error);
+                });
+            }, 60000); // 60000 milliseconds = 60 seconds
         });
     </script>
+
+  
   <script src="https://karthithehacker.com/assets/js/script.js"></script>
 
   <!--
