@@ -39,35 +39,7 @@ client
     <link rel="shortcut icon" href="https://code-glitchers.github.io/Glitch-Gadgets/favicon.ico" type="image/x-icon">
   
 
-  <script>// Example function to display an in-app notification
-function displayNotification(productName, productDescription, productPrice) {
-    const notificationElement = document.createElement('div');
-    notificationElement.classList.add('notification');
-
-    notificationElement.innerHTML = `
-        <p>New Product Alert:</p>
-        <p>Name: ${productName}</p>
-        <p>Description: ${productDescription}</p>
-        <p>Price: ${productPrice}</p>
-    `;
-
-    // Add the notification to the notifications container
-    const notificationsContainer = document.getElementById('notificationsContainer');
-    notificationsContainer.appendChild(notificationElement);
-}
-
-// When the "View Product" button is clicked
-const viewProductButton = document.querySelector('.view-product');
-viewProductButton.addEventListener('click', () => {
-    // Extract product information (replace with actual extraction code)
-    const productName = 'Product Name';
-    const productDescription = 'Product Description';
-    const productPrice = '$99.99';
-
-    // Display the notification
-    displayNotification(productName, productDescription, productPrice);
-});
-  </script>
+  
 
 
 
@@ -162,7 +134,7 @@ viewProductButton.addEventListener('click', () => {
 
   
 </style>
-<div id="notificationsContainer">
+
  
   
 
