@@ -1,24 +1,25 @@
 <products>
     <product>
-        <name>Meta Quest 3</name>
-        <image>https://scontent.fblr20-1.fna.fbcdn.net/v/t39.8562-6/348964950_273022848451750_5035935461406690150_n.png?_nc_cat=110&ccb=1-7&_nc_sid=f537c7&_nc_ohc=JbAoRriWvkIAX_Uxf5J&_nc_ht=scontent.fblr20-1.fna&oh=00_AfDI705oMuYXobK-BaCnTlZI1p2y_S1iva6iFQofnf5bXQ&oe=64DB9065</image>
-        <description>Get ready for Meta Quest 3, our most powerful headset yet...</description>
-        <price>Coming soon</price>
-        <link>https://www.meta.com/quest/quest-3/</link>
+        <name>DJI AVATA</name>
+            <image>https://dji-official-fe.djicdn.com/dps/7e887b22f37a6c041f16a5ca98b02c56.png</image>
+
+        <description>Lorem ipsum dolor sit amet...</description>
+        <price>$49.99</price>
+        <link>product1.html</link>
     </product>
     <product>
-        <name>Meta Quest 2</name>
-        <image>https://scontent.fblr20-1.fna.fbcdn.net/v/t39.8562-6/345672355_598158892292688_4505810592596149386_n.png?_nc_cat=110&ccb=1-7&_nc_sid=f537c7&_nc_ohc=l7Pt0spdj2AAX-ylTTK&_nc_ht=scontent.fblr20-1.fna&oh=00_AfDbeQWdhSWkdtySLu945sO3UBJKThQ51iZJBDSNiFjxlQ&oe=64DBF771</image>
-        <description>Immersive VR Experience...</description>
-        <price>$299.99 USD</price>
-        <link>https://www.meta.com/quest/products/quest-2/?utm_source=duckduckgo.com&utm_medium=oculusredirect</link>
+        <name>Product 2</name>
+        <image>https://code-glitchers.github.io/Glitch-Gadgets/glitch-gadegts.png</image>
+        <description>Nullam vel ligula eu erat...</description>
+        <price>$59.99</price>
+        <link>product2.html</link>
     </product>
       <product>
-        <name>DJI Avata</name>
-        <image>https://dji-official-fe.djicdn.com/dps/7e887b22f37a6c041f16a5ca98b02c56.png</image>
-        <description>Immersive Flight Experience...</description>
-        <price>$1,428</price>
-        <link>https://www.amazon.com/DJI-Avata-Pro-View-Goggles-Built/dp/B0B7GH3X3M?th=1</link>
+        <name>Product11 1</name>
+        <image>https://code-glitchers.github.io/Glitch-Gadgets/glitch-gadegts.png</image>
+        <description>Lorem ipsum dolor sit amet...</description>
+        <price>$49.99</price>
+        <link>product1.html</link>
     </product>
       <product>
         <name>Product 11</name>
