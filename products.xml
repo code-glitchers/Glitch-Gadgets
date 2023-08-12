@@ -1,7 +1,7 @@
 <products>
     <product>
-        <name>Product 1</name>
-        <image>https://code-glitchers.github.io/Glitch-Gadgets/glitch-gadegts.png</image>
+        <name>Meta quest 2</name>
+        <image>https://code-glitchers.github.io/Glitch-Gadgets/images/meta2.png</image>
         <description>Lorem ipsum dolor sit amet...</description>
         <price>$49.99</price>  
         <link>product1.html</link>
